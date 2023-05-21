@@ -1,10 +1,11 @@
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Data.SQLite;
-using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace DNSManager
 {
@@ -33,10 +34,28 @@ namespace DNSManager
             _connection = new SQLiteConnection("Data Source=dns.db;Version=3;");
             _connection.Open();
 
-            // Create the DNS table if it doesn't exist
-            var createTableQuery = "CREATE TABLE IF NOT EXISTS DNS (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, DNS1 TEXT, DNS2 TEXT)";
-            var createTableCommand = new SQLiteCommand(createTableQuery, _connection);
-            createTableCommand.ExecuteNonQuery();
+
+            if (File.Exists("dns.db"))
+            {
+                // Create the DNS table if it doesn't exist
+                var createTableQuery = "CREATE TABLE IF NOT EXISTS DNS (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, DNS1 TEXT, DNS2 TEXT)";
+                var createTableCommand = new SQLiteCommand(createTableQuery, _connection);
+                createTableCommand.ExecuteNonQuery();
+
+                DNSData[] dnsArray = new DNSData[]
+                {
+                    new DNSData { Name = "Radar", DNS1 = "10.202.10.10", DNS2 = "10.202.10.11" },
+                    new DNSData { Name = "Electro", DNS1 = "78.157.42.100", DNS2 = "78.157.42.101" },
+                    new DNSData { Name = "Shecan", DNS1 = "178.22.122.100", DNS2 = "185.51.200.2" },
+                    new DNSData { Name = "403.Online", DNS1 = "10.202.10.202", DNS2 = "10.202.10.102" }
+                };
+
+                foreach (var item in dnsArray)
+                {
+                    insert(item.Name, item.DNS1, item.DNS2);
+                }
+
+            }
         }
 
         private void LoadDNS()
@@ -73,18 +92,23 @@ namespace DNSManager
                 return;
             }
 
-            var insertQuery = "INSERT INTO DNS (Name, DNS1, DNS2) VALUES (@name, @dns1, @dns2)";
-            var insertCommand = new SQLiteCommand(insertQuery, _connection);
-            insertCommand.Parameters.AddWithValue("@name", name);
-            insertCommand.Parameters.AddWithValue("@dns1", dns1);
-            insertCommand.Parameters.AddWithValue("@dns2", dns2);
-            insertCommand.ExecuteNonQuery();
+            insert(name, dns1, dns2);
 
             LoadDNS();
 
             textBoxName.Text = "";
             textBoxDNS1.Text = "";
             textBoxDNS2.Text = "";
+        }
+
+        private void insert(string name, string dns1, string dns2)
+        {
+            var insertQuery = "INSERT INTO DNS (Name, DNS1, DNS2) VALUES (@name, @dns1, @dns2)";
+            var insertCommand = new SQLiteCommand(insertQuery, _connection);
+            insertCommand.Parameters.AddWithValue("@name", name);
+            insertCommand.Parameters.AddWithValue("@dns1", dns1);
+            insertCommand.Parameters.AddWithValue("@dns2", dns2);
+            insertCommand.ExecuteNonQuery();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)

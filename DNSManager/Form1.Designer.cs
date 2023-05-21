@@ -42,6 +42,7 @@
             buttonEdit = new MaterialSkin.Controls.MaterialButton();
             buttonDelete = new MaterialSkin.Controls.MaterialButton();
             buttonAdd = new MaterialSkin.Controls.MaterialButton();
+            materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             materialCard1.SuspendLayout();
             materialCard2.SuspendLayout();
             SuspendLayout();
@@ -327,11 +328,25 @@
             buttonAdd.UseVisualStyleBackColor = true;
             buttonAdd.Click += buttonAdd_Click;
             // 
+            // materialLabel4
+            // 
+            materialLabel4.AutoSize = true;
+            materialLabel4.Depth = 0;
+            materialLabel4.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            materialLabel4.Location = new Point(19, 561);
+            materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel4.Name = "materialLabel4";
+            materialLabel4.Size = new Size(82, 14);
+            materialLabel4.TabIndex = 15;
+            materialLabel4.Text = "Version 0.1.0.0";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(290, 571);
+            ClientSize = new Size(290, 580);
+            Controls.Add(materialLabel4);
             Controls.Add(materialCard2);
             Controls.Add(materialCard1);
             MaximizeBox = false;
@@ -344,6 +359,7 @@
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -361,5 +377,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
     }
 }
