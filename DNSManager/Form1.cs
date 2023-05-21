@@ -1,18 +1,29 @@
+using MaterialSkin;
+using MaterialSkin.Controls;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 
 namespace DNSManager
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MaterialForm
     {
         private SQLiteConnection _connection;
 
         public Form1()
         {
             InitializeComponent();
+            InitializeSkin();
             InitializeDatabase();
             LoadDNS();
+        }
+
+        private void InitializeSkin()
+        {
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Purple400, Primary.Purple900, Primary.Purple900, Accent.Purple200, TextShade.WHITE);
         }
 
         private void InitializeDatabase()

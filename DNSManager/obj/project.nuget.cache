@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "HFrSCPVHKgFHlXe/7MU0eB1ZTbzupibm830Dxysmu+o7kc7MRfjtKKhJX7/UjRdfW4mNPnDyDEM1elABqx96aA==",
+  "dgSpecHash": "QZZ/lxFXBdUw+wuf8Gfz3Ji4CMu5EkDXmpee+Ip3Ei98II4BQOq1xKGFsQsfJt9Yc28flejwoxgGu/Lo0NL3LQ==",
   "success": true,
   "projectFilePath": "C:\\CurrentProjects\\CSharp\\DNSManager\\DNSManager\\DNSManager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\materialskin.2\\2.3.1\\materialskin.2.2.3.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
