@@ -33,6 +33,9 @@
             textBoxDNS1 = new MaterialSkin.Controls.MaterialTextBox2();
             textBoxDNS2 = new MaterialSkin.Controls.MaterialTextBox2();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
             buttonClearDNS = new MaterialSkin.Controls.MaterialButton();
             buttonApplyDNS = new MaterialSkin.Controls.MaterialButton();
@@ -57,13 +60,14 @@
             comboBoxDNS.FormattingEnabled = true;
             comboBoxDNS.IntegralHeight = false;
             comboBoxDNS.ItemHeight = 43;
-            comboBoxDNS.Location = new Point(17, 190);
+            comboBoxDNS.Location = new Point(17, 263);
             comboBoxDNS.MaxDropDownItems = 4;
             comboBoxDNS.MouseState = MaterialSkin.MouseState.OUT;
             comboBoxDNS.Name = "comboBoxDNS";
-            comboBoxDNS.Size = new Size(327, 49);
+            comboBoxDNS.Size = new Size(220, 49);
             comboBoxDNS.StartIndex = 0;
             comboBoxDNS.TabIndex = 9;
+            comboBoxDNS.TextChanged += comboBoxDNS_TextChanged;
             // 
             // textBoxName
             // 
@@ -74,7 +78,7 @@
             textBoxName.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             textBoxName.HideSelection = true;
             textBoxName.LeadingIcon = null;
-            textBoxName.Location = new Point(17, 17);
+            textBoxName.Location = new Point(20, 35);
             textBoxName.MaxLength = 32767;
             textBoxName.MouseState = MaterialSkin.MouseState.OUT;
             textBoxName.Name = "textBoxName";
@@ -86,7 +90,7 @@
             textBoxName.SelectionLength = 0;
             textBoxName.SelectionStart = 0;
             textBoxName.ShortcutsEnabled = true;
-            textBoxName.Size = new Size(327, 48);
+            textBoxName.Size = new Size(220, 48);
             textBoxName.TabIndex = 10;
             textBoxName.TabStop = false;
             textBoxName.TextAlign = HorizontalAlignment.Left;
@@ -102,7 +106,7 @@
             textBoxDNS1.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             textBoxDNS1.HideSelection = true;
             textBoxDNS1.LeadingIcon = null;
-            textBoxDNS1.Location = new Point(17, 71);
+            textBoxDNS1.Location = new Point(17, 121);
             textBoxDNS1.MaxLength = 32767;
             textBoxDNS1.MouseState = MaterialSkin.MouseState.OUT;
             textBoxDNS1.Name = "textBoxDNS1";
@@ -114,7 +118,7 @@
             textBoxDNS1.SelectionLength = 0;
             textBoxDNS1.SelectionStart = 0;
             textBoxDNS1.ShortcutsEnabled = true;
-            textBoxDNS1.Size = new Size(327, 48);
+            textBoxDNS1.Size = new Size(220, 48);
             textBoxDNS1.TabIndex = 11;
             textBoxDNS1.TabStop = false;
             textBoxDNS1.TextAlign = HorizontalAlignment.Left;
@@ -130,7 +134,7 @@
             textBoxDNS2.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             textBoxDNS2.HideSelection = true;
             textBoxDNS2.LeadingIcon = null;
-            textBoxDNS2.Location = new Point(17, 125);
+            textBoxDNS2.Location = new Point(17, 198);
             textBoxDNS2.MaxLength = 32767;
             textBoxDNS2.MouseState = MaterialSkin.MouseState.OUT;
             textBoxDNS2.Name = "textBoxDNS2";
@@ -142,7 +146,7 @@
             textBoxDNS2.SelectionLength = 0;
             textBoxDNS2.SelectionStart = 0;
             textBoxDNS2.ShortcutsEnabled = true;
-            textBoxDNS2.Size = new Size(327, 48);
+            textBoxDNS2.Size = new Size(220, 48);
             textBoxDNS2.TabIndex = 12;
             textBoxDNS2.TabStop = false;
             textBoxDNS2.TextAlign = HorizontalAlignment.Left;
@@ -152,6 +156,9 @@
             // materialCard1
             // 
             materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(materialLabel3);
+            materialCard1.Controls.Add(materialLabel2);
+            materialCard1.Controls.Add(materialLabel1);
             materialCard1.Controls.Add(textBoxName);
             materialCard1.Controls.Add(textBoxDNS2);
             materialCard1.Controls.Add(comboBoxDNS);
@@ -163,8 +170,44 @@
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(362, 258);
+            materialCard1.Size = new Size(255, 329);
             materialCard1.TabIndex = 13;
+            // 
+            // materialLabel3
+            // 
+            materialLabel3.AutoSize = true;
+            materialLabel3.Depth = 0;
+            materialLabel3.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel3.Location = new Point(17, 176);
+            materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel3.Name = "materialLabel3";
+            materialLabel3.Size = new Size(112, 19);
+            materialLabel3.TabIndex = 13;
+            materialLabel3.Text = "Secondary DNS";
+            // 
+            // materialLabel2
+            // 
+            materialLabel2.AutoSize = true;
+            materialLabel2.Depth = 0;
+            materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel2.Location = new Point(20, 99);
+            materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel2.Name = "materialLabel2";
+            materialLabel2.Size = new Size(96, 19);
+            materialLabel2.TabIndex = 13;
+            materialLabel2.Text = "Primary DNS ";
+            // 
+            // materialLabel1
+            // 
+            materialLabel1.AutoSize = true;
+            materialLabel1.Depth = 0;
+            materialLabel1.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel1.Location = new Point(20, 13);
+            materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel1.Name = "materialLabel1";
+            materialLabel1.Size = new Size(79, 19);
+            materialLabel1.TabIndex = 13;
+            materialLabel1.Text = "DNS Name";
             // 
             // materialCard2
             // 
@@ -176,12 +219,12 @@
             materialCard2.Controls.Add(buttonAdd);
             materialCard2.Depth = 0;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(19, 355);
+            materialCard2.Location = new Point(19, 425);
             materialCard2.Margin = new Padding(14);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
             materialCard2.Padding = new Padding(14);
-            materialCard2.Size = new Size(362, 129);
+            materialCard2.Size = new Size(253, 129);
             materialCard2.TabIndex = 14;
             // 
             // buttonClearDNS
@@ -191,7 +234,7 @@
             buttonClearDNS.Depth = 0;
             buttonClearDNS.HighEmphasis = true;
             buttonClearDNS.Icon = null;
-            buttonClearDNS.Location = new Point(124, 68);
+            buttonClearDNS.Location = new Point(136, 68);
             buttonClearDNS.Margin = new Padding(4, 6, 4, 6);
             buttonClearDNS.MouseState = MaterialSkin.MouseState.HOVER;
             buttonClearDNS.Name = "buttonClearDNS";
@@ -211,7 +254,7 @@
             buttonApplyDNS.Depth = 0;
             buttonApplyDNS.HighEmphasis = true;
             buttonApplyDNS.Icon = null;
-            buttonApplyDNS.Location = new Point(17, 68);
+            buttonApplyDNS.Location = new Point(18, 68);
             buttonApplyDNS.Margin = new Padding(4, 6, 4, 6);
             buttonApplyDNS.MouseState = MaterialSkin.MouseState.HOVER;
             buttonApplyDNS.Name = "buttonApplyDNS";
@@ -231,7 +274,7 @@
             buttonEdit.Depth = 0;
             buttonEdit.HighEmphasis = true;
             buttonEdit.Icon = null;
-            buttonEdit.Location = new Point(89, 20);
+            buttonEdit.Location = new Point(90, 20);
             buttonEdit.Margin = new Padding(4, 6, 4, 6);
             buttonEdit.MouseState = MaterialSkin.MouseState.HOVER;
             buttonEdit.Name = "buttonEdit";
@@ -251,7 +294,7 @@
             buttonDelete.Depth = 0;
             buttonDelete.HighEmphasis = true;
             buttonDelete.Icon = null;
-            buttonDelete.Location = new Point(161, 20);
+            buttonDelete.Location = new Point(162, 20);
             buttonDelete.Margin = new Padding(4, 6, 4, 6);
             buttonDelete.MouseState = MaterialSkin.MouseState.HOVER;
             buttonDelete.Name = "buttonDelete";
@@ -271,7 +314,7 @@
             buttonAdd.Depth = 0;
             buttonAdd.HighEmphasis = true;
             buttonAdd.Icon = null;
-            buttonAdd.Location = new Point(17, 20);
+            buttonAdd.Location = new Point(18, 20);
             buttonAdd.Margin = new Padding(4, 6, 4, 6);
             buttonAdd.MouseState = MaterialSkin.MouseState.HOVER;
             buttonAdd.Name = "buttonAdd";
@@ -288,14 +331,16 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(398, 514);
+            ClientSize = new Size(290, 571);
             Controls.Add(materialCard2);
             Controls.Add(materialCard1);
+            MaximizeBox = false;
             Name = "Form1";
             Sizable = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "DNS Manager";
             materialCard1.ResumeLayout(false);
+            materialCard1.PerformLayout();
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
             ResumeLayout(false);
@@ -313,5 +358,8 @@
         private MaterialSkin.Controls.MaterialButton buttonEdit;
         private MaterialSkin.Controls.MaterialButton buttonDelete;
         private MaterialSkin.Controls.MaterialButton buttonAdd;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

@@ -2,7 +2,9 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Data.SQLite;
 using System.Diagnostics;
+using System.Net;
 using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 
 namespace DNSManager
 {
@@ -65,6 +67,12 @@ namespace DNSManager
                 return;
             }
 
+            if (!IsDnsFormatValid(dns1) && !IsDnsFormatValid(dns2))
+            {
+                MessageBox.Show("Please enter valid format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var insertQuery = "INSERT INTO DNS (Name, DNS1, DNS2) VALUES (@name, @dns1, @dns2)";
             var insertCommand = new SQLiteCommand(insertQuery, _connection);
             insertCommand.Parameters.AddWithValue("@name", name);
@@ -106,6 +114,12 @@ namespace DNSManager
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(newDNS1) || string.IsNullOrEmpty(newDNS2))
             {
                 MessageBox.Show("Name and new DNS fields cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!IsDnsFormatValid(newDNS1) && !IsDnsFormatValid(newDNS2))
+            {
+                MessageBox.Show("Please enter valid format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -200,6 +214,37 @@ namespace DNSManager
             }
 
             return string.Empty;
+        }
+
+        private void comboBoxDNS_TextChanged(object sender, EventArgs e)
+        {
+            var name = comboBoxDNS.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(name))
+            {
+                MessageBox.Show("Please select a name to apply DNS.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var selectQuery = "SELECT NAME, DNS1, DNS2 FROM DNS WHERE Name = @name";
+            var selectCommand = new SQLiteCommand(selectQuery, _connection);
+            selectCommand.Parameters.AddWithValue("@name", name);
+            var reader = selectCommand.ExecuteReader();
+
+            if (reader.Read())
+            {
+                textBoxName.Text = reader.GetString(0);
+                textBoxDNS1.Text = reader.GetString(1);
+                textBoxDNS2.Text = reader.GetString(2);
+            }
+
+            reader.Close();
+        }
+
+        public static bool IsDnsFormatValid(string dns)
+        {
+            string pattern = @"^(\d{1,3}\.){3}\d{1,3}$";
+            return Regex.IsMatch(dns, pattern);
         }
     }
 }
