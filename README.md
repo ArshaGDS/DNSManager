@@ -27,4 +27,4 @@ This DNS Manager App is licensed under the [MIT License](https://github.com/git/
 <br/>
 ![UI](https://i.ibb.co/nbHjSqz/Screenshot-2023-05-22-131137.png)
 <br/>
-![UI](https://i.ibb.co/X3JHfhq/Screenshot-2023-05-22-131200.png)
+![UI2](https://i.ibb.co/X3JHfhq/Screenshot-2023-05-22-131200.png)
