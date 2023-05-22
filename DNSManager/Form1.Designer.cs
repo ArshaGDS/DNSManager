@@ -61,7 +61,7 @@
             comboBoxDNS.FormattingEnabled = true;
             comboBoxDNS.IntegralHeight = false;
             comboBoxDNS.ItemHeight = 43;
-            comboBoxDNS.Location = new Point(17, 263);
+            comboBoxDNS.Location = new Point(17, 274);
             comboBoxDNS.MaxDropDownItems = 4;
             comboBoxDNS.MouseState = MaterialSkin.MouseState.OUT;
             comboBoxDNS.Name = "comboBoxDNS";
@@ -135,7 +135,7 @@
             textBoxDNS2.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             textBoxDNS2.HideSelection = true;
             textBoxDNS2.LeadingIcon = null;
-            textBoxDNS2.Location = new Point(17, 198);
+            textBoxDNS2.Location = new Point(17, 208);
             textBoxDNS2.MaxLength = 32767;
             textBoxDNS2.MouseState = MaterialSkin.MouseState.OUT;
             textBoxDNS2.Name = "textBoxDNS2";
@@ -171,7 +171,7 @@
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(255, 329);
+            materialCard1.Size = new Size(255, 340);
             materialCard1.TabIndex = 13;
             // 
             // materialLabel3
@@ -179,7 +179,7 @@
             materialLabel3.AutoSize = true;
             materialLabel3.Depth = 0;
             materialLabel3.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel3.Location = new Point(17, 176);
+            materialLabel3.Location = new Point(17, 186);
             materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel3.Name = "materialLabel3";
             materialLabel3.Size = new Size(112, 19);
@@ -220,7 +220,7 @@
             materialCard2.Controls.Add(buttonAdd);
             materialCard2.Depth = 0;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(19, 425);
+            materialCard2.Location = new Point(17, 435);
             materialCard2.Margin = new Padding(14);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
@@ -334,18 +334,18 @@
             materialLabel4.Depth = 0;
             materialLabel4.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
             materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            materialLabel4.Location = new Point(19, 561);
+            materialLabel4.Location = new Point(19, 568);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
-            materialLabel4.Size = new Size(82, 14);
+            materialLabel4.Size = new Size(62, 14);
             materialLabel4.TabIndex = 15;
-            materialLabel4.Text = "Version 0.1.0.0";
+            materialLabel4.Text = "Version 0.1";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(290, 580);
+            ClientSize = new Size(290, 592);
             Controls.Add(materialLabel4);
             Controls.Add(materialCard2);
             Controls.Add(materialCard1);

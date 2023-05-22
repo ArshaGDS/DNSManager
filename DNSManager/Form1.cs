@@ -1,11 +1,8 @@
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Data.SQLite;
-using System.IO;
-using System.Net;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace DNSManager
 {
@@ -31,17 +28,26 @@ namespace DNSManager
 
         private void InitializeDatabase()
         {
+
             _connection = new SQLiteConnection("Data Source=dns.db;Version=3;");
             _connection.Open();
 
+            // Create the DNS table if it doesn't exist
+            var createTableQuery = "CREATE TABLE IF NOT EXISTS DNS (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, DNS1 TEXT, DNS2 TEXT)";
+            var createTableCommand = new SQLiteCommand(createTableQuery, _connection);
+            createTableCommand.ExecuteNonQuery();
 
-            if (File.Exists("dns.db"))
+            // Create the Initialize table if it doesn't exist
+            createTableQuery = "CREATE TABLE IF NOT EXISTS Init (Id INTEGER PRIMARY KEY AUTOINCREMENT, InitializedDB BLOB DEFAULT false)";
+            createTableCommand = new SQLiteCommand(createTableQuery, _connection);
+            createTableCommand.ExecuteNonQuery();
+
+            var selectQuery = "SELECT * FROM DNS";
+            var selectCommand = new SQLiteCommand(selectQuery, _connection);
+            var reader = selectCommand.ExecuteReader();
+
+            if (reader.StepCount <= 0)
             {
-                // Create the DNS table if it doesn't exist
-                var createTableQuery = "CREATE TABLE IF NOT EXISTS DNS (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, DNS1 TEXT, DNS2 TEXT)";
-                var createTableCommand = new SQLiteCommand(createTableQuery, _connection);
-                createTableCommand.ExecuteNonQuery();
-
                 DNSData[] dnsArray = new DNSData[]
                 {
                     new DNSData { Name = "Radar", DNS1 = "10.202.10.10", DNS2 = "10.202.10.11" },
@@ -54,8 +60,9 @@ namespace DNSManager
                 {
                     insert(item.Name, item.DNS1, item.DNS2);
                 }
-
             }
+
+            reader.Close();
         }
 
         private void LoadDNS()
