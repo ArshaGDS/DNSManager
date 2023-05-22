@@ -21,6 +21,6 @@ Use the intuitive interface to manage DNS entries, apply or clear DNS configurat
 Contributions to this DNS Manager App project are welcome! If you find any issues, have suggestions for improvements, or would like to add new features, feel free to submit a pull request. Please refer to the contributing guidelines in the repository for more information.
 <br/>
 ## License<br/>
-This DNS Manager App is licensed under the (MIT License)[https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt], allowing for open-source contributions and personal or commercial use.
+This DNS Manager App is licensed under the [MIT License](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt), allowing for open-source contributions and personal or commercial use.
 <br/>
-[UI](https://i.ibb.co/nbHjSqz/Screenshot-2023-05-22-131137.png)
+![UI](https://i.ibb.co/nbHjSqz/Screenshot-2023-05-22-131137.png)
