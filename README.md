@@ -1,4 +1,4 @@
-#DNS Manager App
+#DNS Manager App<br/>
 The DNS Manager App is a C# application designed to manage DNS configurations in a user-friendly way. It provides a graphical interface for users to add, edit, and delete DNS entries, along with their associated names. The app leverages the power of SQLite database to store the DNS information, allowing for efficient retrieval and management.
 
 #Key Features
