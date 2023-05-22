@@ -15,7 +15,7 @@ Run the DNSManager.exe file to launch the application.
 Use the intuitive interface to manage DNS entries, apply or clear DNS configurations in Windows.
 <br/>
 ## Requirements<br/>
-(.Net V6)[https://download.visualstudio.microsoft.com/download/pr/513d13b7-b456-45af-828b-b7b7981ff462/edf44a743b78f8b54a2cec97ce888346/windowsdesktop-runtime-6.0.15-win-x64.exe]
+[.Net V6](https://download.visualstudio.microsoft.com/download/pr/513d13b7-b456-45af-828b-b7b7981ff462/edf44a743b78f8b54a2cec97ce888346/windowsdesktop-runtime-6.0.15-win-x64.exe)
 <br/>
 ## Contributions<br/>
 Contributions to this DNS Manager App project are welcome! If you find any issues, have suggestions for improvements, or would like to add new features, feel free to submit a pull request. Please refer to the contributing guidelines in the repository for more information.
