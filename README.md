@@ -24,7 +24,4 @@ Contributions to this DNS Manager App project are welcome! If you find any issue
 This DNS Manager App is licensed under the [MIT License](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt), allowing for open-source contributions and personal or commercial use.
 <br/>
 ### User interface 
-<br/>
 ![UI](https://i.ibb.co/nbHjSqz/Screenshot-2023-05-22-131137.png)
-<br/>
-![UI2](https://i.ibb.co/X3JHfhq/Screenshot-2023-05-22-131200.png)
