@@ -93,6 +93,12 @@ namespace DNSManager
                 return;
             }
 
+            if (checkName(name))
+            {
+                MessageBox.Show("The DNS name must not be duplicated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (!IsDnsFormatValid(dns1) && !IsDnsFormatValid(dns2))
             {
                 MessageBox.Show("Please enter valid format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -116,6 +122,26 @@ namespace DNSManager
             insertCommand.Parameters.AddWithValue("@dns1", dns1);
             insertCommand.Parameters.AddWithValue("@dns2", dns2);
             insertCommand.ExecuteNonQuery();
+        }
+
+        private bool checkName(string name)
+        {
+
+            var selectQuery = "SELECT Name FROM DNS";
+            var selectCommand = new SQLiteCommand(selectQuery, _connection);
+            var reader = selectCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if (reader.GetString(0) == name)
+                {
+                    return true;
+                }
+            }
+
+            reader.Close();
+
+            return false;
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)

@@ -67,7 +67,7 @@
             comboBoxDNS.Name = "comboBoxDNS";
             comboBoxDNS.Size = new Size(220, 49);
             comboBoxDNS.StartIndex = 0;
-            comboBoxDNS.TabIndex = 9;
+            comboBoxDNS.TabIndex = 4;
             comboBoxDNS.TextChanged += comboBoxDNS_TextChanged;
             // 
             // textBoxName
@@ -92,7 +92,7 @@
             textBoxName.SelectionStart = 0;
             textBoxName.ShortcutsEnabled = true;
             textBoxName.Size = new Size(220, 48);
-            textBoxName.TabIndex = 10;
+            textBoxName.TabIndex = 1;
             textBoxName.TabStop = false;
             textBoxName.TextAlign = HorizontalAlignment.Left;
             textBoxName.TrailingIcon = null;
@@ -120,7 +120,7 @@
             textBoxDNS1.SelectionStart = 0;
             textBoxDNS1.ShortcutsEnabled = true;
             textBoxDNS1.Size = new Size(220, 48);
-            textBoxDNS1.TabIndex = 11;
+            textBoxDNS1.TabIndex = 2;
             textBoxDNS1.TabStop = false;
             textBoxDNS1.TextAlign = HorizontalAlignment.Left;
             textBoxDNS1.TrailingIcon = null;
@@ -148,7 +148,7 @@
             textBoxDNS2.SelectionStart = 0;
             textBoxDNS2.ShortcutsEnabled = true;
             textBoxDNS2.Size = new Size(220, 48);
-            textBoxDNS2.TabIndex = 12;
+            textBoxDNS2.TabIndex = 3;
             textBoxDNS2.TabStop = false;
             textBoxDNS2.TextAlign = HorizontalAlignment.Left;
             textBoxDNS2.TrailingIcon = null;
@@ -241,7 +241,7 @@
             buttonClearDNS.Name = "buttonClearDNS";
             buttonClearDNS.NoAccentTextColor = Color.Empty;
             buttonClearDNS.Size = new Size(99, 36);
-            buttonClearDNS.TabIndex = 10;
+            buttonClearDNS.TabIndex = 9;
             buttonClearDNS.Text = "Clear DNS";
             buttonClearDNS.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             buttonClearDNS.UseAccentColor = false;
@@ -261,7 +261,7 @@
             buttonApplyDNS.Name = "buttonApplyDNS";
             buttonApplyDNS.NoAccentTextColor = Color.Empty;
             buttonApplyDNS.Size = new Size(99, 36);
-            buttonApplyDNS.TabIndex = 10;
+            buttonApplyDNS.TabIndex = 8;
             buttonApplyDNS.Text = "Apply DNS";
             buttonApplyDNS.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             buttonApplyDNS.UseAccentColor = false;
@@ -281,7 +281,7 @@
             buttonEdit.Name = "buttonEdit";
             buttonEdit.NoAccentTextColor = Color.Empty;
             buttonEdit.Size = new Size(64, 36);
-            buttonEdit.TabIndex = 10;
+            buttonEdit.TabIndex = 6;
             buttonEdit.Text = "Edit";
             buttonEdit.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             buttonEdit.UseAccentColor = false;
@@ -301,7 +301,7 @@
             buttonDelete.Name = "buttonDelete";
             buttonDelete.NoAccentTextColor = Color.Empty;
             buttonDelete.Size = new Size(73, 36);
-            buttonDelete.TabIndex = 10;
+            buttonDelete.TabIndex = 7;
             buttonDelete.Text = "Delete";
             buttonDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             buttonDelete.UseAccentColor = false;
@@ -321,7 +321,7 @@
             buttonAdd.Name = "buttonAdd";
             buttonAdd.NoAccentTextColor = Color.Empty;
             buttonAdd.Size = new Size(64, 36);
-            buttonAdd.TabIndex = 9;
+            buttonAdd.TabIndex = 5;
             buttonAdd.Text = "Add";
             buttonAdd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             buttonAdd.UseAccentColor = false;
