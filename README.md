@@ -10,7 +10,7 @@ The DNS Manager App is a C# application designed to manage DNS configurations in
 +**Clear DNS from Windows:** Clear DNS settings from the Windows network configuration for a clean slate.<br/>
 <br/>
 ## Installation and Usage<br/>
-Download the [Release]([url](https://github.com/ArshaGDS/DNSManager/releases/tag/V0.1)) file from the repository.
+Download the [Release](https://github.com/ArshaGDS/DNSManager/releases/tag/V0.1) file from the repository.
 Run the DNSManager.exe file to launch the application.
 Use the intuitive interface to manage DNS entries, apply or clear DNS configurations in Windows.
 <br/>
