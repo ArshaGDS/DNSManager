@@ -24,4 +24,4 @@ Contributions to this DNS Manager App project are welcome! If you find any issue
 This DNS Manager App is licensed under the [MIT License](https://github.com/ArshaGDS/DNSManager/blob/main/LICENSE), allowing for open-source contributions and personal or commercial use.
 <br/>
 ### User interface 
-![UI](https://i.ibb.co/nbHjSqz/Screenshot-2023-05-22-131137.png)
+![UI](https://github.com/ArshaGDS/DNSManager/blob/main/DNSManager/ScreenShots/Screenshot%202023-06-03%20012243.png?raw=true)
