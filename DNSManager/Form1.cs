@@ -3,11 +3,12 @@ using MaterialSkin.Controls;
 using System.Data.SQLite;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace DNSManager
 {
     public partial class Form1 : MaterialForm
-    {
+    {        
         private SQLiteConnection _connection;
 
         public Form1()
@@ -37,32 +38,38 @@ namespace DNSManager
             var createTableCommand = new SQLiteCommand(createTableQuery, _connection);
             createTableCommand.ExecuteNonQuery();
 
-            // Create the Initialize table if it doesn't exist
-            createTableQuery = "CREATE TABLE IF NOT EXISTS Init (Id INTEGER PRIMARY KEY AUTOINCREMENT, InitializedDB BLOB DEFAULT false)";
-            createTableCommand = new SQLiteCommand(createTableQuery, _connection);
-            createTableCommand.ExecuteNonQuery();
-
             var selectQuery = "SELECT * FROM DNS";
             var selectCommand = new SQLiteCommand(selectQuery, _connection);
             var reader = selectCommand.ExecuteReader();
 
             if (reader.StepCount <= 0)
             {
-                DNSData[] dnsArray = new DNSData[]
-                {
-                    new DNSData { Name = "Radar", DNS1 = "10.202.10.10", DNS2 = "10.202.10.11" },
-                    new DNSData { Name = "Electro", DNS1 = "78.157.42.100", DNS2 = "78.157.42.101" },
-                    new DNSData { Name = "Shecan", DNS1 = "178.22.122.100", DNS2 = "185.51.200.2" },
-                    new DNSData { Name = "403.Online", DNS1 = "10.202.10.202", DNS2 = "10.202.10.102" }
-                };
-
-                foreach (var item in dnsArray)
+                foreach (var item in GetDefaultDNSs())
                 {
                     insert(item.Name, item.DNS1, item.DNS2);
                 }
             }
 
             reader.Close();
+        }
+
+        private DNSData[] GetDefaultDNSs()
+        {
+            return new DNSData[]
+                {
+                    new DNSData { Name = "Radar.Game", DNS1 = "10.202.10.10",   DNS2 = "10.202.10.11"    },
+                    new DNSData { Name = "Electro",    DNS1 = "78.157.42.100",  DNS2 = "78.157.42.101"   },
+                    new DNSData { Name = "Shecan",     DNS1 = "178.22.122.100", DNS2 = "185.51.200.2"    },
+                    new DNSData { Name = "403.Online", DNS1 = "10.202.10.202",  DNS2 = "10.202.10.102"   },
+                    new DNSData { Name = "Begzar",     DNS1 = "185.55.226.26",  DNS2 = "185.55.225.25"   },
+                    new DNSData { Name = "Quad DNS",   DNS1 = "9.9.9.9",        DNS2 = "149.112.112.112" },
+                    new DNSData { Name = "Open DNS",   DNS1 = "208.67.222.222", DNS2 = "208.67.220.220"  },
+                    new DNSData { Name = "Cloudflare", DNS1 = "1.1.1.1",        DNS2 = "1.0.0.1"         },
+                    new DNSData { Name = "Google",     DNS1 = "8.8.8.8",        DNS2 = "8.8.4.4"         },
+                    new DNSData { Name = "DNS1",       DNS1 = "94.203.132.99",  DNS2 = "94.200.156.82"   },
+                    new DNSData { Name = "DNS2",       DNS1 = "77.88.8.1",      DNS2 = "77.88.8.8"       },
+                    new DNSData { Name = "DNS3",       DNS1 = "94.140.14.140",  DNS2 = "94.140.14.141"   }
+                };
         }
 
         private void LoadDNS()
@@ -88,20 +95,23 @@ namespace DNSManager
             var dns2 = textBoxDNS2.Text.Trim();
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(dns1) || string.IsNullOrEmpty(dns2))
-            {
-                MessageBox.Show("Name and DNS fields cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {                
+                MessageForm messageForm = new MessageForm("Error", "Name and DNS fields cannot be empty.", "Ok");
+                messageForm.ShowDialog();
                 return;
             }
 
             if (checkName(name))
-            {
-                MessageBox.Show("The DNS name must not be duplicated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {                
+                MessageForm messageForm = new MessageForm("Error", "The DNS name must not be duplicated.", "Ok");
+                messageForm.ShowDialog();
                 return;
             }
 
             if (!IsDnsFormatValid(dns1) && !IsDnsFormatValid(dns2))
-            {
-                MessageBox.Show("Please enter valid format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {                
+                MessageForm messageForm = new MessageForm("Error", "Please enter valid format.", "Ok");
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -146,61 +156,100 @@ namespace DNSManager
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+
             var name = comboBoxDNS.SelectedItem?.ToString();
+            MessageForm messageForm;
 
             if (string.IsNullOrEmpty(name))
             {
-                MessageBox.Show("Please select a name to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                messageForm = new MessageForm("Error", "Please select a name to delete.", "Ok");
+                messageForm.ShowDialog();
                 return;
             }
 
-            var deleteQuery = "DELETE FROM DNS WHERE Name = @name";
-            var deleteCommand = new SQLiteCommand(deleteQuery, _connection);
-            deleteCommand.Parameters.AddWithValue("@name", name);
-            deleteCommand.ExecuteNonQuery();
+            Action btnYes = () => {
 
-            LoadDNS();
+                var deleteQuery = "DELETE FROM DNS WHERE Name = @name";
+                var deleteCommand = new SQLiteCommand(deleteQuery, _connection);
+                deleteCommand.Parameters.AddWithValue("@name", name);
+                deleteCommand.ExecuteNonQuery();
+
+                LoadDNS();
+
+                textBoxName.Text = "";
+                textBoxDNS1.Text = "";
+                textBoxDNS2.Text = "";
+
+                messageForm = new MessageForm("Done.", "Ok");
+                messageForm.ShowDialog();
+            };
+
+            Action btnNo = () => { };
+
+            messageForm = new MessageForm("Warning", "Are you sure?", "Yes", "No", btnYes, btnNo);
+            messageForm.ShowDialog();            
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            var name = comboBoxDNS.SelectedItem?.ToString();
+
+            var selectedItem = comboBoxDNS.SelectedItem?.ToString();
+            var newName = textBoxName.Text.Trim();
             var newDNS1 = textBoxDNS1.Text.Trim();
             var newDNS2 = textBoxDNS2.Text.Trim();
 
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(newDNS1) || string.IsNullOrEmpty(newDNS2))
+            MessageForm messageForm;
+
+            if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newDNS1) || string.IsNullOrEmpty(newDNS2))
             {
-                MessageBox.Show("Name and new DNS fields cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                messageForm = new MessageForm("Error", "Name and new DNS fields cannot be empty.", "Ok");
+                messageForm.ShowDialog();
                 return;
             }
 
             if (!IsDnsFormatValid(newDNS1) && !IsDnsFormatValid(newDNS2))
             {
-                MessageBox.Show("Please enter valid format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                messageForm = new MessageForm("Error", "Please enter valid format.", "Ok");
+                messageForm.ShowDialog();
                 return;
             }
 
-            var updateQuery = "UPDATE DNS SET DNS1 = @newDNS1, DNS2 = @newDNS2 WHERE Name = @name";
-            var updateCommand = new SQLiteCommand(updateQuery, _connection);
-            updateCommand.Parameters.AddWithValue("@newDNS1", newDNS1);
-            updateCommand.Parameters.AddWithValue("@newDNS2", newDNS2);
-            updateCommand.Parameters.AddWithValue("@name", name);
-            updateCommand.ExecuteNonQuery();
+            Action btnYes = () => {
 
-            LoadDNS();
+                var updateQuery = "UPDATE DNS SET Name = @newName, DNS1 = @newDNS1, DNS2 = @newDNS2 WHERE Name = @selectedDNS";
+                var updateCommand = new SQLiteCommand(updateQuery, _connection);
+                updateCommand.Parameters.AddWithValue("@newName", newName);
+                updateCommand.Parameters.AddWithValue("@newDNS1", newDNS1);
+                updateCommand.Parameters.AddWithValue("@newDNS2", newDNS2);
+                updateCommand.Parameters.AddWithValue("@selectedDNS", selectedItem);
+                updateCommand.ExecuteNonQuery();
 
-            textBoxName.Text = "";
-            textBoxDNS1.Text = "";
-            textBoxDNS2.Text = "";
+                LoadDNS();
+
+                textBoxName.Text = "";
+                textBoxDNS1.Text = "";
+                textBoxDNS2.Text = "";
+
+                messageForm = new MessageForm("Done.", "Ok");
+                messageForm.ShowDialog();
+            };
+
+            Action btnNo = () => { };
+            
+            messageForm = new MessageForm("Warning", "Are you sure?", "Yes", "No", btnYes, btnNo);
+            messageForm.ShowDialog();                      
         }
 
         private void buttonApplyDNS_Click(object sender, EventArgs e)
         {
             var name = comboBoxDNS.SelectedItem?.ToString();
 
+            MessageForm messageForm;
+
             if (string.IsNullOrEmpty(name))
-            {
-                MessageBox.Show("Please select a name to apply DNS.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {                
+                messageForm = new MessageForm("Error", "Please select a name to apply DNS.", "Ok");
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -217,11 +266,16 @@ namespace DNSManager
             }
 
             reader.Close();
+
+            messageForm = new MessageForm("Done.", "Ok");
+            messageForm.ShowDialog();
         }
 
         private void buttonClearDNS_Click(object sender, EventArgs e)
         {
             ClearDNS();
+            MessageForm messageForm = new MessageForm("Done.", "Ok");
+            messageForm.ShowDialog();
         }
 
         private void ApplyDNS(string dns1, string dns2)
@@ -238,9 +292,9 @@ namespace DNSManager
         private void ExecuteCommand(string command)
         {
             // Execute a command in a new process and wait for it to finish
-            using (var process = new System.Diagnostics.Process())
+            using (var process = new Process())
             {
-                var startInfo = new System.Diagnostics.ProcessStartInfo()
+                var startInfo = new ProcessStartInfo()
                 {
                     FileName = "cmd.exe",
                     Arguments = "/C " + command,
@@ -279,7 +333,8 @@ namespace DNSManager
 
             if (string.IsNullOrEmpty(name))
             {
-                MessageBox.Show("Please select a name to apply DNS.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageForm messageForm = new MessageForm("Error", "Please select a name to apply DNS.", "Ok");
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -302,6 +357,11 @@ namespace DNSManager
         {
             string pattern = @"^(\d{1,3}\.){3}\d{1,3}$";
             return Regex.IsMatch(dns, pattern);
+        }
+
+        private void githubLink_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo { FileName = @"https://github.com/ArshaGDS/DNSManager", UseShellExecute = true });
         }
     }
 }

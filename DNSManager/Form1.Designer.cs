@@ -33,6 +33,7 @@
             textBoxDNS1 = new MaterialSkin.Controls.MaterialTextBox2();
             textBoxDNS2 = new MaterialSkin.Controls.MaterialTextBox2();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
@@ -43,6 +44,7 @@
             buttonDelete = new MaterialSkin.Controls.MaterialButton();
             buttonAdd = new MaterialSkin.Controls.MaterialButton();
             materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            githubLink = new MaterialSkin.Controls.MaterialLabel();
             materialCard1.SuspendLayout();
             materialCard2.SuspendLayout();
             SuspendLayout();
@@ -61,7 +63,7 @@
             comboBoxDNS.FormattingEnabled = true;
             comboBoxDNS.IntegralHeight = false;
             comboBoxDNS.ItemHeight = 43;
-            comboBoxDNS.Location = new Point(17, 274);
+            comboBoxDNS.Location = new Point(17, 294);
             comboBoxDNS.MaxDropDownItems = 4;
             comboBoxDNS.MouseState = MaterialSkin.MouseState.OUT;
             comboBoxDNS.Name = "comboBoxDNS";
@@ -157,6 +159,7 @@
             // materialCard1
             // 
             materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(materialLabel5);
             materialCard1.Controls.Add(materialLabel3);
             materialCard1.Controls.Add(materialLabel2);
             materialCard1.Controls.Add(materialLabel1);
@@ -166,13 +169,25 @@
             materialCard1.Controls.Add(textBoxDNS1);
             materialCard1.Depth = 0;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(17, 78);
+            materialCard1.Location = new Point(19, 78);
             materialCard1.Margin = new Padding(14);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(255, 340);
+            materialCard1.Size = new Size(255, 363);
             materialCard1.TabIndex = 13;
+            // 
+            // materialLabel5
+            // 
+            materialLabel5.AutoSize = true;
+            materialLabel5.Depth = 0;
+            materialLabel5.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel5.Location = new Point(17, 273);
+            materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel5.Name = "materialLabel5";
+            materialLabel5.Size = new Size(93, 19);
+            materialLabel5.TabIndex = 14;
+            materialLabel5.Text = "Select a DNS";
             // 
             // materialLabel3
             // 
@@ -220,7 +235,7 @@
             materialCard2.Controls.Add(buttonAdd);
             materialCard2.Depth = 0;
             materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(17, 435);
+            materialCard2.Location = new Point(20, 456);
             materialCard2.Margin = new Padding(14);
             materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard2.Name = "materialCard2";
@@ -334,21 +349,38 @@
             materialLabel4.Depth = 0;
             materialLabel4.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
             materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            materialLabel4.Location = new Point(19, 568);
+            materialLabel4.Location = new Point(19, 588);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
             materialLabel4.Size = new Size(62, 14);
             materialLabel4.TabIndex = 15;
-            materialLabel4.Text = "Version 0.1";
+            materialLabel4.Text = "Version 0.2";
+            // 
+            // githubLink
+            // 
+            githubLink.AutoSize = true;
+            githubLink.Cursor = Cursors.Hand;
+            githubLink.Depth = 0;
+            githubLink.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
+            githubLink.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            githubLink.Location = new Point(233, 588);
+            githubLink.MouseState = MaterialSkin.MouseState.HOVER;
+            githubLink.Name = "githubLink";
+            githubLink.Size = new Size(37, 14);
+            githubLink.TabIndex = 15;
+            githubLink.Text = "Github";
+            githubLink.Click += githubLink_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(290, 592);
+            ClientSize = new Size(293, 614);
+            Controls.Add(githubLink);
             Controls.Add(materialLabel4);
             Controls.Add(materialCard2);
             Controls.Add(materialCard1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "Form1";
             Sizable = false;
@@ -378,5 +410,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialLabel githubLink;
     }
 }

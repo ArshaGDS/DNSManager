@@ -31,3 +31,4 @@ C:\CurrentProjects\CSharp\DNSManager\DNSManager\obj\Debug\net6.0-windows\DNSMana
 C:\CurrentProjects\CSharp\DNSManager\DNSManager\obj\Debug\net6.0-windows\DNSManager.genruntimeconfig.cache
 C:\CurrentProjects\CSharp\DNSManager\DNSManager\obj\Debug\net6.0-windows\ref\DNSManager.dll
 C:\CurrentProjects\CSharp\DNSManager\DNSManager\bin\Debug\net6.0-windows\MaterialSkin.dll
+C:\CurrentProjects\CSharp\DNSManager\DNSManager\obj\Debug\net6.0-windows\DNSManager.MessageForm.resources
