@@ -8,11 +8,19 @@ using System.Diagnostics;
 namespace DNSManager
 {
     public partial class Form1 : MaterialForm
-    {        
+    {
+
+        // Form size
+        private readonly int Width = 293;
+        private readonly int Height = 587;
+        private readonly Size FormSize;
+
         private SQLiteConnection _connection;
 
         public Form1()
         {
+            FormSize = new Size(Width, Height);
+
             InitializeComponent();
             InitializeSkin();
             InitializeDatabase();
@@ -24,7 +32,7 @@ namespace DNSManager
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Purple400, Primary.Purple900, Primary.Purple900, Accent.Purple200, TextShade.WHITE);
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Green500, Primary.Green700, Primary.Green700, Accent.Green200, TextShade.WHITE);
         }
 
         private void InitializeDatabase()
@@ -95,21 +103,21 @@ namespace DNSManager
             var dns2 = textBoxDNS2.Text.Trim();
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(dns1) || string.IsNullOrEmpty(dns2))
-            {                
+            {
                 MessageForm messageForm = new MessageForm("Error", "Name and DNS fields cannot be empty.", "Ok");
                 messageForm.ShowDialog();
                 return;
             }
 
             if (checkName(name))
-            {                
+            {
                 MessageForm messageForm = new MessageForm("Error", "The DNS name must not be duplicated.", "Ok");
                 messageForm.ShowDialog();
                 return;
             }
 
             if (!IsDnsFormatValid(dns1) && !IsDnsFormatValid(dns2))
-            {                
+            {
                 MessageForm messageForm = new MessageForm("Error", "Please enter valid format.", "Ok");
                 messageForm.ShowDialog();
                 return;
@@ -167,7 +175,8 @@ namespace DNSManager
                 return;
             }
 
-            Action btnYes = () => {
+            Action btnYes = () =>
+            {
 
                 var deleteQuery = "DELETE FROM DNS WHERE Name = @name";
                 var deleteCommand = new SQLiteCommand(deleteQuery, _connection);
@@ -187,7 +196,7 @@ namespace DNSManager
             Action btnNo = () => { };
 
             messageForm = new MessageForm("Warning", "Are you sure?", "Yes", "No", btnYes, btnNo);
-            messageForm.ShowDialog();            
+            messageForm.ShowDialog();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -202,7 +211,7 @@ namespace DNSManager
 
             if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newDNS1) || string.IsNullOrEmpty(newDNS2))
             {
-                messageForm = new MessageForm("Error", "Name and new DNS fields cannot be empty.", "Ok");
+                messageForm = new MessageForm("Error", "Name and DNS fields cannot be empty.", "Ok");
                 messageForm.ShowDialog();
                 return;
             }
@@ -214,7 +223,8 @@ namespace DNSManager
                 return;
             }
 
-            Action btnYes = () => {
+            Action btnYes = () =>
+            {
 
                 var updateQuery = "UPDATE DNS SET Name = @newName, DNS1 = @newDNS1, DNS2 = @newDNS2 WHERE Name = @selectedDNS";
                 var updateCommand = new SQLiteCommand(updateQuery, _connection);
@@ -235,9 +245,9 @@ namespace DNSManager
             };
 
             Action btnNo = () => { };
-            
+
             messageForm = new MessageForm("Warning", "Are you sure?", "Yes", "No", btnYes, btnNo);
-            messageForm.ShowDialog();                      
+            messageForm.ShowDialog();
         }
 
         private void buttonApplyDNS_Click(object sender, EventArgs e)
@@ -247,7 +257,7 @@ namespace DNSManager
             MessageForm messageForm;
 
             if (string.IsNullOrEmpty(name))
-            {                
+            {
                 messageForm = new MessageForm("Error", "Please select a name to apply DNS.", "Ok");
                 messageForm.ShowDialog();
                 return;
@@ -362,6 +372,13 @@ namespace DNSManager
         private void githubLink_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo { FileName = @"https://github.com/ArshaGDS/DNSManager", UseShellExecute = true });
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            // Set the minimum and maximum size to prevent resizing
+            this.MinimumSize = FormSize;
+            this.MaximumSize = FormSize;
         }
     }
 }

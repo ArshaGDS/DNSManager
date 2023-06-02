@@ -5,13 +5,20 @@ namespace DNSManager
 {
     public partial class MessageForm : MaterialForm
     {
+
+        // Form size
+        private Size originalSize;
+
         public MessageForm(String Text, String BtnText)
         {
             InitializeComponent();
             InitializeSkin();
 
             materialLabel1.Text = Text;
+            materialLabel1.TextAlign = ContentAlignment.MiddleCenter;
+
             buttonDone.Text = BtnText;
+            buttonDone.Location = new Point(119, 139);
         }
 
         public MessageForm(String Title, String Text, String BtnText)
@@ -24,6 +31,7 @@ namespace DNSManager
             buttonDone.Text = BtnText;
 
             materialLabel2.Visible = true;
+            buttonDone.Location = new Point(119, 139);
         }
 
         Action _Btn1Click, _Btn2Click;
@@ -50,7 +58,7 @@ namespace DNSManager
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Purple400, Primary.Purple900, Primary.Purple900, Accent.Purple200, TextShade.WHITE);
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Green500, Primary.Green700, Primary.Green700, Accent.Green200, TextShade.WHITE);
         }
 
         private void buttonDone_Click(object sender, EventArgs e)
@@ -70,5 +78,17 @@ namespace DNSManager
             }
             this.Close();
         }
+
+        private void MessageForm_Load(object sender, EventArgs e)
+        {
+            originalSize = this.Size;
+        }
+
+        private void MessageForm_Resize(object sender, EventArgs e)
+        {
+            // Set the minimum and maximum size to prevent resizing
+            this.Size = originalSize;
+        }
+
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessageForm));
             buttonDone = new MaterialSkin.Controls.MaterialButton();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -37,13 +38,14 @@
             // buttonDone
             // 
             buttonDone.AccessibleRole = AccessibleRole.None;
+            buttonDone.AutoSize = false;
             buttonDone.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             buttonDone.Cursor = Cursors.Hand;
             buttonDone.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             buttonDone.Depth = 0;
             buttonDone.HighEmphasis = true;
             buttonDone.Icon = null;
-            buttonDone.Location = new Point(19, 139);
+            buttonDone.Location = new Point(78, 139);
             buttonDone.Margin = new Padding(4, 6, 4, 6);
             buttonDone.MouseState = MaterialSkin.MouseState.HOVER;
             buttonDone.Name = "buttonDone";
@@ -59,11 +61,12 @@
             // materialLabel1
             // 
             materialLabel1.Depth = 0;
-            materialLabel1.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel1.Location = new Point(19, 71);
+            materialLabel1.Font = new Font("Roboto", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.Body2;
+            materialLabel1.Location = new Point(6, 71);
             materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(286, 62);
+            materialLabel1.Size = new Size(292, 62);
             materialLabel1.TabIndex = 1;
             materialLabel1.Text = "Message";
             materialLabel1.TextAlign = ContentAlignment.MiddleCenter;
@@ -72,10 +75,10 @@
             // 
             materialLabel2.Depth = 0;
             materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel2.Location = new Point(19, 47);
+            materialLabel2.Location = new Point(6, 44);
             materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel2.Name = "materialLabel2";
-            materialLabel2.Size = new Size(286, 26);
+            materialLabel2.Size = new Size(292, 26);
             materialLabel2.TabIndex = 2;
             materialLabel2.Text = "Title";
             materialLabel2.Visible = false;
@@ -83,13 +86,14 @@
             // buttonCancel
             // 
             buttonCancel.AccessibleRole = AccessibleRole.None;
+            buttonCancel.AutoSize = false;
             buttonCancel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             buttonCancel.Cursor = Cursors.Hand;
             buttonCancel.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             buttonCancel.Depth = 0;
             buttonCancel.HighEmphasis = true;
             buttonCancel.Icon = null;
-            buttonCancel.Location = new Point(228, 139);
+            buttonCancel.Location = new Point(150, 139);
             buttonCancel.Margin = new Padding(4, 6, 4, 6);
             buttonCancel.MouseState = MaterialSkin.MouseState.HOVER;
             buttonCancel.Name = "buttonCancel";
@@ -97,7 +101,8 @@
             buttonCancel.Size = new Size(77, 36);
             buttonCancel.TabIndex = 3;
             buttonCancel.Text = "Cancel";
-            buttonCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            buttonCancel.TextAlign = ContentAlignment.MiddleRight;
+            buttonCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
             buttonCancel.UseAccentColor = false;
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Visible = false;
@@ -107,21 +112,22 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(397, 387);
+            ClientSize = new Size(304, 192);
             Controls.Add(buttonCancel);
             Controls.Add(materialLabel2);
             Controls.Add(materialLabel1);
             Controls.Add(buttonDone);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
             FormStyle = FormStyles.ActionBar_None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "MessageForm";
             Padding = new Padding(3, 24, 3, 3);
             StartPosition = FormStartPosition.CenterParent;
             Text = "MessageForm";
+            Load += MessageForm_Load;
+            Resize += MessageForm_Resize;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
